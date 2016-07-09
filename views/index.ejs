@@ -1,48 +1,199 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-csp="" ng-app="app"> <!--<![endif]-->
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css"/>
+    <title>SVG to Symbol Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" />
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.0/angular-ui-router.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.5.5/angular-resource.min.js"></script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="http://pc035860.github.io/angular-highlightjs/angular-highlightjs.min.js"></script>
+
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
     <script src="/javascripts/app.js"></script>
   </head>
   <body ng-controller="Controller">
-    <h1>SVG to Symbol converter</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4" id="left">
+          <div class="spacer-">
+              <h1 class="title">SVG to Symbol Converter</h1>
+              <p>
+                This tools will help you to bring
+                <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/symbol" rel="noopener">
+                  &lt;symbol&gt;
+                </a>
+                to your webpages.
+              </p>
+              <p>
+                If you are wondering why is better to use symbol instead of svg then read <a href="https://css-tricks.com/svg-symbol-good-choice-icons/" rel="noopener">the article from CSS-Tricks</a>
+              </p>
+              <hr  />
+              <form>
+                <div class="form-group">
+                  <label>
+                    Convert SVG
+                  </label>
+                  <textarea
+                    rows="3"
+                    autofocus
+                    ng-model="textarea"
+                    class="form-control"
+                    placeholder="<svg>
+  <!-- here the svg to convert... -->
+</svg>"></textarea>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    ng-click="textarea && change()"
+                    ng-attr-disabled="{{isLoading ? 'disabled': undefined}}">
+                      <span ng-if="!isLoading">
+                        Convert&#32;&#32;&#32;
+                        <span class="glyphicon glyphicon-send"></span>
+                      </span>
+                      <span ng-if="isLoading">
+                        Converting...
+                      </span>
+                  </button>
+                  <div ng-if="message" class="label label-warning">
+                    {{message}}
+                  </div>
+                </div>
+              </form>
+          </div>
+        </div>
+        <div class="col-sm-8" id="right">
 
-    <textarea cols="50" rows="10" ng-model="textarea" placeholder="Fill this with an <svg></svg> then hit Go when ready..."></textarea>
-    <button type="button" ng-click="change()">Go <span ng-if="isLoading">(loading...)</span></button>
-    <h2>
-      Your input:
-    </h2>
-    <div id="input" ng-bind-html="input | rawHtml"></div>
-    <hr />
+          <div class="panel panel-default" ng-repeat="result in results track by $index">
+            <div class="panel-heading small text-right">{{result.time | date : 'dd/MM/yy HH:mm:ss' }}</div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label>
+                    Svg (your input)
+                  </label>
+                  <div class="icon" ng-bind-html="result.svg | rawHtml"></div>
+                </div>
+                <div class="col-sm-6">
+                  <label>
+                    Symbol (converted to)
+                  </label>
+                  <div class="hide" ng-bind-html="result.symbol | rawHtml"></div>
+                  <div class="icon" ng-bind-html="result.icon | rawHtml"></div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-footer small">
+              <button class="btn btn-xs" ng-click="showCode('code-'+$index)">
+                Get the code <span class="glyphicon glyphicon-console"></span>
+              </button>
+              <div
+                ng-attr-id="{{'code-'+$index}}"
+                class="code hide"
+                hljs
+                hljs-source="result.codeSample"
+                >
+              </div>
+              <%# {{result.codeSample}}%>
+            </div>
+          </div>
+        </div>
 
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
-    <h2>
-      Result:
-    </h2>
-    <div id="result reference container" ng-bind-html="symbol | rawHtml"></div>
-    <div id="result-icon-display" ng-bind-html="icon | rawHtml"></div>
-    <hr />
+        </div>
+      </div>
+    </div>
 
-    code to use:
-    <pre>{{symbol}}</pre>
-    <hr />
-
+    <a href="https://github.com/NKjoep/svg-to-symbol" target="noopener">
+      <img
+        style="position: fixed; top: 0; left: 0; border: 0;"   src="https://camo.githubusercontent.com/8b6b8ccc6da3aa5722903da7b58eb5ab1081adee/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6f72616e67655f6666373630302e706e67"
+        alt="Fork svg-to-symbol-converter on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png">
+    </a>
   </body>
 </html>

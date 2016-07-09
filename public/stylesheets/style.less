@@ -1,53 +1,65 @@
-@color: #00B7FF;
-
-*, :after, :before {
-  // box-sizing: border-box;
-  // fill: inherit;
-  // stroke: inherit;
-  /* any other styles, such as stroke-width, that you want to override */
-}
-
-body {
-  font-size: 20px;
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-textarea {
-  width: 100%;
-}
-
-button {
-  display: block;
-  width: 300px;
-  height: 40px;
-  margin: 1.5em;
-}
-
-#result {
-  // background: desaturate(@color, 90%);
-  // min-height: 400px;
-  // color: #fff;
-}
-
-#input,
-#result-icon-display {
-  background: #c0c0c0;
-  padding: 10px;
-  max-width: 300px;
-  max-height: 300px;
-  svg {
-    width: 300px;
-    height: 300px;
+@color: #E37600;
+@base-size: 20px;
+.form-control,
+a {
+  color: @color;
+  &:href,
+  &:visited {
+    color: @color;
+  }
+  &:active,
+  &:focus,
+  &:hover {
+    color: lighten(@color, 5%);
+    outline: @color;
+    border-color: lighten(@color, 15%);
   }
 }
-
-.symbol-display {
-  width: 120px;
-  height: 120px;
+.margin-md-top() {
+  margin-top: @base-size;
 }
-
-pre {
+body {
+  .margin-md-top();
+}
+.glyphicon {}
+.panel-heading {
+  padding: @base-size/4;
+}
+[ng-model="textarea"] {
+  border: 2px solid @color;
+  border-radius: 5px;
   width: 100%;
-  overflow: scroll;
+  height: (@base-size*15) !important;
+  margin-bottom: @base-size/2;
+}
+#left {
+  position: fixed;
+  width: (@base-size*15);
+  // background: yellow;
+  .spacer {
+    padding-left: @base-size;
+    padding-right: @base-size;
+  }
+}
+#right {
+  margin-left: (@base-size*15);
+}
+.code {
+  margin-top: @base-size/3;
+  background: white;
+  .hljs, pre, code {
+    background: white;
+  }
+}
+.icon {
+  width: @base-size*5;
+  height: @base-size*5;
+  max-width: @base-size*5;
+  max-height: @base-size*5;
+  background: #c0c0c0;
+  padding: @base-size/2;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 }
