@@ -1,0 +1,48 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-csp="" ng-app="app"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.0/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.5.5/angular-resource.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="/javascripts/app.js"></script>
+  </head>
+  <body ng-controller="Controller">
+    <h1>SVG to Symbol converter</h1>
+
+    <textarea cols="50" rows="10" ng-model="textarea" placeholder="Fill this with an <svg></svg> then hit Go when ready..."></textarea>
+    <button type="button" ng-click="change()">Go <span ng-if="isLoading">(loading...)</span></button>
+    <h2>
+      Your input:
+    </h2>
+    <div id="input" ng-bind-html="input | rawHtml"></div>
+    <hr />
+
+
+    <h2>
+      Result:
+    </h2>
+    <div id="result reference container" ng-bind-html="symbol | rawHtml"></div>
+    <div id="result-icon-display" ng-bind-html="icon | rawHtml"></div>
+    <hr />
+
+    code to use:
+    <pre>{{symbol}}</pre>
+    <hr />
+
+  </body>
+</html>
