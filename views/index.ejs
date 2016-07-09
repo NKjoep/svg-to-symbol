@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SVG to Symbol Converter</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"/>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.0/angular-ui-router.min.js"></script>
@@ -25,53 +25,44 @@
       <div class="row">
         <div class="col-sm-4" id="left">
           <div class="spacer-">
-              <h1 class="title">SVG to Symbol Converter</h1>
-              <p>
-                This tools will help you to bring
-                <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/symbol" rel="noopener">
-                  &lt;symbol&gt;
-                </a>
-                to your webpages.
-              </p>
-              <p>
-                If you are wondering why is better to use symbol instead of svg then read <a href="https://css-tricks.com/svg-symbol-good-choice-icons/" rel="noopener">the article from CSS-Tricks</a>
-              </p>
-              <hr  />
-              <form>
-                <div class="form-group">
-                  <label>
-                    Convert SVG
-                  </label>
-                  <textarea
-                    rows="3"
-                    autofocus
-                    ng-model="textarea"
-                    class="form-control"
-                    placeholder="<svg>
+            <h1 class="title">SVG to Symbol Converter</h1>
+            <p>
+              This tools will help you to bring
+              <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/symbol" rel="noopener">
+                &lt;symbol&gt;
+              </a>
+              to your webpages.
+            </p>
+            <p>
+              If you are wondering why is better to use symbol instead of svg then read
+              <a href="https://css-tricks.com/svg-symbol-good-choice-icons/" rel="noopener">the article from CSS-Tricks</a>
+            </p>
+            <hr/>
+            <form>
+              <div class="form-group">
+                <label>
+                  Convert SVG
+                </label>
+                <textarea rows="3" autofocus ng-model="textarea" class="form-control" placeholder="<svg>
   <!-- here the svg to convert... -->
 </svg>"></textarea>
-                  <button
-                    class="btn btn-primary"
-                    type="button"
-                    ng-click="textarea && change()"
-                    ng-attr-disabled="{{isLoading ? 'disabled': undefined}}">
-                      <span ng-if="!isLoading">
-                        Convert&#32;&#32;&#32;
-                        <span class="glyphicon glyphicon-send"></span>
-                      </span>
-                      <span ng-if="isLoading">
-                        Converting...
-                      </span>
-                  </button>
-                  <div ng-if="message" class="label label-warning">
-                    {{message}}
-                  </div>
+                <button class="btn btn-primary" type="button" ng-click="textarea && change()" ng-attr-disabled="{{isLoading ? 'disabled': undefined}}">
+                  <span ng-if="!isLoading">
+                    Convert&#32;&#32;&#32;
+                    <span class="glyphicon glyphicon-send"></span>
+                  </span>
+                  <span ng-if="isLoading">
+                    Converting...
+                  </span>
+                </button>
+                <div ng-if="message" class="label label-warning">
+                  {{message}}
                 </div>
-              </form>
+              </div>
+            </form>
           </div>
         </div>
         <div class="col-sm-8" id="right">
-
           <div class="panel panel-default" ng-repeat="result in results track by $index">
             <div class="panel-heading small text-right">{{result.time | date : 'dd/MM/yy HH:mm:ss' }}</div>
             <div class="panel-body">
@@ -93,107 +84,23 @@
             </div>
             <div class="panel-footer small">
               <button class="btn btn-xs" ng-click="showCode('code-'+$index)">
-                Get the code <span class="glyphicon glyphicon-console"></span>
+                Get the code
+                <span class="glyphicon glyphicon-console"></span>
               </button>
-              <div
-                ng-attr-id="{{'code-'+$index}}"
-                class="code hide"
-                hljs
-                hljs-source="result.codeSample"
-                >
-              </div>
+              <div ng-attr-id="{{'code-'+$index}}" class="code hide" hljs hljs-source="result.codeSample"></div>
               <%# {{result.codeSample}}%>
             </div>
           </div>
         </div>
-
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
-        </div>
       </div>
     </div>
-
-    <a href="https://github.com/NKjoep/svg-to-symbol" target="noopener">
-      <img
-        style="position: fixed; top: 0; left: 0; border: 0;"   src="https://camo.githubusercontent.com/8b6b8ccc6da3aa5722903da7b58eb5ab1081adee/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6f72616e67655f6666373630302e706e67"
-        alt="Fork svg-to-symbol-converter on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png">
-    </a>
-  </body>
+  </div>
+  <a href="https://github.com/NKjoep/svg-to-symbol" target="noopener">
+    <img
+      style="position: fixed; top: 0; left: 0; border: 0;"
+      src="https://camo.githubusercontent.com/8b6b8ccc6da3aa5722903da7b58eb5ab1081adee/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6f72616e67655f6666373630302e706e67"
+      alt="Fork svg-to-symbol-converter on GitHub"
+      data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png">
+  </a>
+</body>
 </html>
