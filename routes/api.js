@@ -1,42 +1,42 @@
+'use strict';
 var express = require('express');
 var router = express.Router();
 var SVGSpriter = require('svg-sprite');
-var path = require('path');
-var mkdirp = require('mkdirp');
-var fs = require('fs');
 
 var config = {
-    "log": "verbose",
-    "mode": {
-        "symbol": {
-            "bust": false,
-            "inline": true,
-            "example": true
-        }
+  'log': 'verbose',
+  'mode': {
+    'symbol': {
+      'bust': false,
+      'inline': true,
+      'example': true
     }
+  }
 };
 
-router.options('/convert-to-symbol', function(req, res, next) {
-    res.status(200).send();
-})
+router.options('/convert-to-symbol', function(req, res) {
+  res.status(200).send();
+});
 
-router.post('/convert-to-symbol', function(req, res, next) {
-    var spriter = new SVGSpriter(config);
-    spriter.add('svg', null, req.body.svgData);
-    spriter.compile(function(error, result) {
-        if (error) {
-            res.status(503).send(error);
-            return;
-        }
-        res.type('json');
-        var data = result.symbol.sprite._contents.toString();
-        data = data
-          .replace(`<symbol viewBox`, `<symbol id="symbol" viewBox`)
-          .replace(/\>\</g, '>\n<')
-          .replace('/id=""/g', '');
-        data.re
-        res.status(200).send({data: data});
+router.post('/convert-to-symbol', function(req, res) {
+  var spriter = new SVGSpriter(config);
+  spriter.add('svg', null, req.body.svgData);
+  spriter.compile(function(error, result) {
+    if (error) {
+      res.status(503).send(error);
+      return;
+    }
+    var data = result.symbol.sprite._contents.toString();
+    data = data
+      .replace(/></g, '>\n<')
+      .replace(/id=""/g, '')
+      .replace(/\s{2,}/gm, '')
+      .replace(/"(?:\s{1,})/gm, '" ');
+    res.type('json').status(200).send({
+      symbol: data,
+      input: req.body.svgData
     });
+  });
 });
 
 module.exports = router;
