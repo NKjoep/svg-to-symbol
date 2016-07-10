@@ -12,10 +12,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.5.5/angular-resource.min.js"></script>
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+    <script src="https://pc035860.github.io/angular-highlightjs/angular-highlightjs.min.js"></script>
 
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-    <script src="//pc035860.github.io/angular-highlightjs/angular-highlightjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.2.7/angular-local-storage.min.js"></script>
 
     <link rel="stylesheet" href="/stylesheets/style.css"/>
     <script src="/javascripts/app.js"></script>
@@ -46,34 +46,50 @@
                 <textarea rows="3" autofocus ng-model="textarea" class="form-control" placeholder="<svg>
   <!-- here the svg to convert... -->
 </svg>"></textarea>
-                <button class="btn btn-primary" type="button" ng-click="textarea && change()" ng-attr-disabled="{{isLoading ? 'disabled': undefined}}">
-                  <span ng-if="!isLoading">
-                    Convert&#32;&#32;&#32;
-                    <span class="glyphicon glyphicon-send"></span>
-                  </span>
-                  <span ng-if="isLoading">
-                    Converting...
-                  </span>
-                </button>
+                <p>
+                  <button class="btn btn-primary" type="button" ng-click="textarea && convert()" ng-attr-disabled="{{isLoading ? 'disabled': undefined}}">
+                    <span ng-if="!isLoading">
+                      Convert&#32;
+                      <span class="glyphicon glyphicon-send"></span>
+                    </span>
+                    <span ng-if="isLoading">
+                      Converting...
+                    </span>
+                  </button>&#32;
+                  <button class="btn btn-link" type="button" ng-click="loadSample()" ng-attr-disabled="{{isLoading ? 'disabled': undefined}}">
+                    or load a sample
+                  </button>
+                </p>
                 <div ng-if="message" class="label label-warning">
                   {{message}}
                 </div>
+                </p>
               </div>
             </form>
           </div>
         </div>
         <div class="col-sm-8" id="right">
           <div class="panel panel-default" ng-repeat="result in results track by $index">
-            <div class="panel-heading small text-right">{{result.time | date : 'dd/MM/yy HH:mm:ss' }}</div>
+            <div class="panel-heading small">
+              <div class="row">
+                <div class="col-xs-6"><span class="btn btn-link btn-xs" disabled>{{result.time | date : 'dd/MM/yy HH:mm:ss' }}</span></div>
+                <div class="col-xs-6 text-right">
+                  <button class="btn btn-xs btn-danger" ng-click="deleteItemFromStorage($index)">
+                    Delete
+                    <span class="glyphicon glyphicon-remove"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-6 text-center">
                   <label>
                     Svg (your input)
                   </label>
                   <div class="icon" ng-bind-html="result.svg | rawHtml"></div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 text-center">
                   <label>
                     Symbol (converted to)
                   </label>
@@ -83,24 +99,38 @@
               </div>
             </div>
             <div class="panel-footer small">
-              <button class="btn btn-xs" ng-click="showCode('code-'+$index)">
-                Get the code
-                <span class="glyphicon glyphicon-console"></span>
-              </button>
+              <div class="row">
+                <div class="col-xs-12 text-left">
+                  <button class="btn btn-xs btn-link" ng-click="showCode('code-'+$index)">
+                    Get the code
+                    <span class="glyphicon glyphicon-console"></span>
+                  </button>
+                </div>
+              </div>
               <div ng-attr-id="{{'code-'+$index}}" class="code hide" hljs hljs-source="result.codeSample"></div>
-              <%# {{result.codeSample}}%>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <a href="https://github.com/NKjoep/svg-to-symbol" target="noopener">
+  <a
+    style="position: fixed; top: 0; left: 0; border: 0;"
+    href="https://github.com/NKjoep/svg-to-symbol"
+    target="noopener">
     <img
-      style="position: fixed; top: 0; left: 0; border: 0;"
       src="https://camo.githubusercontent.com/8b6b8ccc6da3aa5722903da7b58eb5ab1081adee/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6f72616e67655f6666373630302e706e67"
       alt="Fork svg-to-symbol-converter on GitHub"
       data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png">
   </a>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-80535699-1', 'auto');
+    ga('send', 'pageview');
+  </script>
 </body>
 </html>
