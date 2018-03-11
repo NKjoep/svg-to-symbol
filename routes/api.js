@@ -20,7 +20,8 @@ router.options('/convert-to-symbol', function(req, res) {
 
 router.post('/convert-to-symbol', function(req, res) {
   var spriter = new SVGSpriter(config);
-  spriter.add('svg', null, req.body.svgData);
+  var name = `svg-${Math.random()}.svg`;
+  spriter.add(`./${name}`, `${name}`, req.body.svgData);
   spriter.compile(function(error, result) {
     if (error) {
       res.status(503).send(error);
