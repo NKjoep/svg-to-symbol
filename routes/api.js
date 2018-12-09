@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var SVGSpriter = require('svg-sprite');
+var inlineCss = require('inline-css');
 
 var config = {
   'log': 'verbose',
@@ -14,11 +15,22 @@ var config = {
   }
 };
 
+var inlineStyleMw = function(req, res, next) {
+  inlineCss(req.body.svgData, { url: '/' })
+    .then(function(newSvgData) {
+      req.body.svgData = newSvgData;
+      next();
+    })
+    .catch(() => {
+      next();
+    });
+};
+
 router.options('/convert-to-symbol', function(req, res) {
   res.status(200).send();
 });
 
-router.post('/convert-to-symbol', function(req, res) {
+router.post('/convert-to-symbol', inlineStyleMw, function(req, res) {
   var spriter = new SVGSpriter(config);
   var name = `svg-${Math.random()}.svg`;
   spriter.add(`./${name}`, `${name}`, req.body.svgData);

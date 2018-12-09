@@ -13,6 +13,7 @@ var http = require('http');
  */
 
 var port = normalizePort(process.env.PORT || '3000');
+var host = process.env.HOST || '0.0.0.0';
 app.set('port', port);
 
 /**
@@ -25,10 +26,10 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, host);
 server.on('error', onError);
 server.on('listening', onListening);
-console.log('server listening on ', port);
+console.log('server listening on ' + host + ':' + port);
 
 /**
  * Normalize a port into a number, string, or false.
