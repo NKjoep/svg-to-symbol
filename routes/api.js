@@ -20,6 +20,9 @@ var inlineStyleMw = function(req, res, next) {
     .then(function(newSvgData) {
       req.body.svgData = newSvgData;
       next();
+    })
+    .catch(() => {
+      next();
     });
 };
 
